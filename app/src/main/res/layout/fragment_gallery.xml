@@ -4,20 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f6f7eb"
     tools:context=".ui.gallery.GalleryFragment">
 
+    <!-- Banner principal -->
     <TextView
-        android:id="@+id/text_gallery"
+        android:id="@+id/text_banner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="This is gallery fragment"
+        android:layout_margin="8dp"
+        android:text="Ingresos y Gastos"
         android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textColor="#070707"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Botón para agregar ingresos -->
+
+    <!-- Botón para agregar gastos -->
+    <Button
+        android:id="@+id/btn_agregar_ingresos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#44bba4"
+        android:text="Agregar Ingresos"
+        app:layout_constraintEnd_toStartOf="@id/btn_agregar_gastos"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_banner" />
+
+    <Button
+        android:id="@+id/btn_agregar_gastos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Agregar Gastos"
+        android:backgroundTint="#e94f37"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/text_banner"
+        app:layout_constraintStart_toEndOf="@id/btn_agregar_ingresos"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Título de la sección Gastos -->
+    <TextView
+        android:id="@+id/text_gastos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="#090909"
+        android:text="Gastos"
+        android:textColor="#101010"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_agregar_ingresos" />
+
+    <!-- RecyclerView para la lista de gastos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_gastos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="8dp"
+        app:layout_constraintTop_toBottomOf="@id/text_gastos"
+        app:layout_constraintBottom_toTopOf="@id/text_ingresos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Título de la sección Ingresos -->
+    <TextView
+        android:id="@+id/text_ingresos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Ingresos"
+        android:textColor="#101010"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_gastos" />
+
+    <!-- RecyclerView para la lista de ingresos -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_ingresos"
+        android:layout_width="396dp"
+        android:layout_height="310dp"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_ingresos" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
