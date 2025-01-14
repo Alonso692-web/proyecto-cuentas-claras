@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="barra_tareas_app">#2962FF</color>
+    <color name="titulos_color">#070707</color>
 </resources>
