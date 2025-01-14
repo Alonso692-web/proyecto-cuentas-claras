@@ -5,8 +5,52 @@ import android.widget.ImageView // Importante
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyecto_cuentas_claras.R
+import com.example.proyecto_cuentas_claras.databinding.ItemNoticiaBinding
 import com.example.proyecto_cuentas_claras.ui.salud_financiera.data.Noticia
 
+class NoticiasAdapter(
+    private val onNoticiaClick: (Noticia) -> Unit
+) : RecyclerView.Adapter<NoticiasAdapter.NoticiaViewHolder>() {
+    private var noticias: List<Noticia> = emptyList()
+
+    class NoticiaViewHolder(
+        val binding: ItemNoticiaBinding,
+        val onNoticiaClick: (Noticia) -> Unit
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(noticia: Noticia) {
+            binding.apply {
+                tituloNoticia.text = noticia.titulo
+                descripcionNoticia.text = noticia.descripcion
+
+                // Configurar el click en todo el item
+                root.setOnClickListener {
+                    onNoticiaClick(noticia)
+                }
+            }
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoticiaViewHolder {
+        val binding = ItemNoticiaBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return NoticiaViewHolder(binding, onNoticiaClick)
+    }
+
+    override fun onBindViewHolder(holder: NoticiaViewHolder, position: Int) {
+        holder.bind(noticias[position])
+    }
+
+    override fun getItemCount() = noticias.size
+
+    fun actualizarNoticias(nuevasNoticias: List<Noticia>) {
+        noticias = nuevasNoticias
+        notifyDataSetChanged()
+    }
+}
+/*
 class NoticiaAdapter(private val listaNoticias: List<Noticia>) :
     RecyclerView.Adapter<NoticiaAdapter.NoticiaViewHolder>() {
 
@@ -32,4 +76,4 @@ class NoticiaAdapter(private val listaNoticias: List<Noticia>) :
     }
 
     override fun getItemCount() = listaNoticias.size
-}
+}*/
