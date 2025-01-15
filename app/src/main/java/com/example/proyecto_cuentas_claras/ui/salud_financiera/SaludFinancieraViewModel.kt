@@ -46,7 +46,8 @@ class SaludFinancieraViewModel : ViewModel() {
                                     val item = jsonElement.asJsonObject
                                     Noticia(
                                         titulo = item.get("title")?.asString ?: "",
-                                        descripcion = item.get("description")?.asString ?: ""
+                                        descripcion = item.get("description")?.asString ?: "",
+                                        href = item . get ("href")?.asString ?: ""
                                     )
                                 } catch (e: Exception) {
                                     Log.w(
@@ -72,57 +73,6 @@ class SaludFinancieraViewModel : ViewModel() {
             }
         }
     }
-
-
-    /*private fun obtenerNoticias() {
-        uiScope.launch {
-            try {
-                val noticiasObtenidas = withContext(Dispatchers.IO) {
-                    val client = OkHttpClient()
-                    val request = Request.Builder()
-                        .url("https://api.apitube.io/v1/news/everything?language.code=es&title=finance&api_key=api_live_1dTRp7oUyO6fYS0TqBj5d7OvgHxPDn0hs2ygwAPHGwrDzS7&limit=50")
-                        .get()
-                        .build()
-
-                    val response = client.newCall(request).execute()
-                    if (response.isSuccessful) {
-                        val responseBody = response.body?.string()
-                        if (responseBody != null) {
-                            val gson = Gson()
-                            val jsonObject = gson.fromJson(responseBody, JsonObject::class.java)
-
-                            // Verificar que "export" existe y obtener los resultados
-                            if (jsonObject.has("export")) {
-                                val resultsArray = jsonObject.getAsJsonArray("export")
-                                resultsArray.mapNotNull { jsonElement ->
-                                    try {
-                                        val item = jsonElement.asJsonObject
-                                        Noticia(
-                                            titulo = item.get("title")?.asString ?: "",
-                                            descripcion = item.get("description")?.asString ?: "",
-                                            urlImagen = item.get("image")?.asString ?: ""
-                                        )
-                                    } catch (e: Exception) {
-                                        null
-                                    }
-                                }
-                            } else {
-                                emptyList()
-                            }
-                        } else {
-                            emptyList()
-                        }
-                    } else {
-                        emptyList()
-                    }
-                }
-                _noticias.value = noticiasObtenidas
-            } catch (e: Exception) {
-                Log.w("SaludFinanciera", "Error al obtener noticias: ${e.message}")
-                _noticias.value = emptyList()
-            }
-        }
-    }*/
 
     override fun onCleared() {
         super.onCleared()
