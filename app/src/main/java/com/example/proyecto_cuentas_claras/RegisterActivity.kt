@@ -41,7 +41,7 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         btnRegresarR.setOnClickListener {
-            val intentRegresar = Intent(this, MainActivity::class.java)
+            val intentRegresar = Intent(this, LoginActivity::class.java)
             startActivity(intentRegresar)
         }
 
@@ -52,24 +52,25 @@ class RegisterActivity : AppCompatActivity() {
         val correo: String = etCorreoR.text.toString()
         val contraseña: String = etContraseñaR.text.toString()
 
-        if (nombre.isEmpty()){
+        if (nombre.isEmpty()) {
             Toast.makeText(applicationContext, "Ingrese un nombre", Toast.LENGTH_SHORT).show()
-        }else if(correo.isEmpty()){
+        } else if (correo.isEmpty()) {
             Toast.makeText(applicationContext, "Ingrese un correo", Toast.LENGTH_SHORT).show()
-        }else if (contraseña.isEmpty()){
+        } else if (contraseña.isEmpty()) {
             Toast.makeText(applicationContext, "Ingrese una contraseña", Toast.LENGTH_SHORT).show()
-        }else{
+        } else {
             RegistrarUsuario(correo, contraseña)
         }
     }
 
     private fun RegistrarUsuario(correo: String, contraseña: String) {
         auth.createUserWithEmailAndPassword(correo, contraseña)
-            .addOnCompleteListener { task->
-                if (task.isSuccessful){
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
                     var uid: String = ""
                     uid = auth.currentUser!!.uid
-                    reference = FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid)
+                    reference =
+                        FirebaseDatabase.getInstance().reference.child("Usuarios").child(uid)
 
                     val hashmap = HashMap<String, Any>()
                     val hash_nombre: String = etNombreR.text.toString()
@@ -81,24 +82,30 @@ class RegisterActivity : AppCompatActivity() {
                     hashmap["imagen"] = ""
                     hashmap["buscar"] = hash_nombre.lowercase()
 
-                    reference.updateChildren(hashmap).addOnCompleteListener { task2->
-                        if (task2.isSuccessful){
+                    reference.updateChildren(hashmap).addOnCompleteListener { task2 ->
+                        if (task2.isSuccessful) {
                             val intent = Intent(this@RegisterActivity, MainActivity::class.java)
-                            Toast.makeText(applicationContext, "Se ha registrado correctamente", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                applicationContext,
+                                "Se ha registrado correctamente",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             startActivity(intent)
                         }
-                    }.addOnFailureListener { e->
-                        Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
+                    }.addOnFailureListener { e ->
+                        Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT)
+                            .show()
                     }
-                }else{
-                    Toast.makeText(applicationContext, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(applicationContext, "Ha ocurrido un error", Toast.LENGTH_SHORT)
+                        .show()
                 }
-            }.addOnFailureListener { e->
+            }.addOnFailureListener { e ->
                 Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun InicializarVariables(){
+    private fun InicializarVariables() {
         etNombreR = findViewById(R.id.etNombreR)
         etCorreoR = findViewById(R.id.etCorreoR)
         etContraseñaR = findViewById(R.id.etContraseñaR)

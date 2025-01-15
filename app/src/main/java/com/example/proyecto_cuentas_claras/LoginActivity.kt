@@ -73,6 +73,7 @@ class LoginActivity : AppCompatActivity() {
                     val intentIS = Intent(this@LoginActivity, MainActivity::class.java)
                     Toast.makeText(applicationContext, "Ha iniciado sesión", Toast.LENGTH_SHORT)
                         .show()
+                    val nombre = auth.currentUser?.displayName
                     startActivity(intentIS)
                     finish()
                 } else {
