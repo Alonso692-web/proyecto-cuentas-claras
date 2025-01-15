@@ -37,13 +37,13 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnRegresarIS.setOnClickListener {
-            val intentRegresarIS = Intent(this, MainActivity::class.java)
+            val intentRegresarIS = Intent(this, InicioActivity::class.java)
             startActivity(intentRegresarIS)
         }
 
     }
 
-    private fun InicializarVariables(){
+    private fun InicializarVariables() {
         etCorreoIS = findViewById(R.id.etCorreoIS)
         etContraseñaIS = findViewById(R.id.etContraseñaIS)
         btnIniciarSesion = findViewById(R.id.btnIniciarSesionAct)
@@ -51,33 +51,35 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
     }
 
-    private fun ValidarDatos(){
+    private fun ValidarDatos() {
         val correoIS: String = etCorreoIS.text.toString()
         val contraseñaIS: String = etContraseñaIS.text.toString()
 
-        if (correoIS.isEmpty()){
-            Toast.makeText(applicationContext, "Ingrese su correo electrónico", Toast.LENGTH_SHORT).show()
+        if (correoIS.isEmpty()) {
+            Toast.makeText(applicationContext, "Ingrese su correo electrónico", Toast.LENGTH_SHORT)
+                .show()
         }
-        if(contraseñaIS.isEmpty()){
+        if (contraseñaIS.isEmpty()) {
             Toast.makeText(applicationContext, "Ingrese su contraseña", Toast.LENGTH_SHORT).show()
-        }
-        else{
+        } else {
             LoginUsuario(correoIS, contraseñaIS)
         }
     }
 
     private fun LoginUsuario(correoIS: String, contraseñaIS: String) {
         auth.signInWithEmailAndPassword(correoIS, contraseñaIS)
-            .addOnCompleteListener { task->
-                if (task.isSuccessful){
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
                     val intentIS = Intent(this@LoginActivity, MainActivity::class.java)
-                    Toast.makeText(applicationContext, "Ha iniciado sesión", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(applicationContext, "Ha iniciado sesión", Toast.LENGTH_SHORT)
+                        .show()
                     startActivity(intentIS)
                     finish()
-                }else{
-                    Toast.makeText(applicationContext, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(applicationContext, "Ha ocurrido un error", Toast.LENGTH_SHORT)
+                        .show()
                 }
-            }.addOnFailureListener { e->
+            }.addOnFailureListener { e ->
                 Toast.makeText(applicationContext, "${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
