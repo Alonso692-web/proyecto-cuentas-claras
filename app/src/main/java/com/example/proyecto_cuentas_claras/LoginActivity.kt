@@ -56,11 +56,11 @@ class LoginActivity : AppCompatActivity() {
         val contraseñaIS: String = etContraseñaIS.text.toString()
 
         if (correoIS.isEmpty()) {
-            Toast.makeText(applicationContext, "Ingrese su correo electrónico", Toast.LENGTH_SHORT)
+            Toast.makeText(this@LoginActivity, "Ingrese su correo electrónico", Toast.LENGTH_SHORT)
                 .show()
         }
         if (contraseñaIS.isEmpty()) {
-            Toast.makeText(applicationContext, "Ingrese su contraseña", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this@LoginActivity, "Ingrese su contraseña", Toast.LENGTH_SHORT).show()
         } else {
             LoginUsuario(correoIS, contraseñaIS)
         }
@@ -71,7 +71,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val intentIS = Intent(this@LoginActivity, MainActivity::class.java)
-                    Toast.makeText(applicationContext, "Ha iniciado sesión", Toast.LENGTH_SHORT)
+                    Toast.makeText(this@LoginActivity, "Ha iniciado sesión", Toast.LENGTH_SHORT)
                         .show()
                     val nombre = auth.currentUser?.displayName
                     startActivity(intentIS)

@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private lateinit var nombreUser: String
 
     var reference: DatabaseReference? = null
     var firebaseUser: FirebaseUser? = null
@@ -44,25 +45,21 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        val navView: NavigationView = binding.navView
-
-        // Recupera el encabezado del NavigationView
-        val headerView = navView.getHeaderView(0)
-
-        idtvNombreNavHeader = headerView.findViewById(R.id.idTvNombreNavHeader)
-        idtvCorreoNavHeader = headerView.findViewById(R.id.idTvCorreoNavHeader)
+        //val navView: NavigationView = binding.navView
 
         binding.appBarMain.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Hola bienvenido", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Hola $nombreUser, bienvenido", Snackbar.LENGTH_LONG)
                 .setAction("Action", null)
                 .setAnchorView(R.id.fab).show()
         }
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        //val navView: NavigationView = binding.navView
+        val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-        firebaseUser = FirebaseAuth.getInstance().currentUser
-        reference =
-            FirebaseDatabase.getInstance().reference.child("Usuarios").child(firebaseUser!!.uid)
+
+        val headerView = navView.getHeaderView(0)
+
+        idtvNombreNavHeader = headerView.findViewById(R.id.idTvNombreNavHeader)
+        idtvCorreoNavHeader = headerView.findViewById(R.id.idTvCorreoNavHeader)
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -73,8 +70,14 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_soporte
             ), drawerLayout
         )
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        firebaseUser = FirebaseAuth.getInstance().currentUser
+        reference =
+            FirebaseDatabase.getInstance().reference.child("Usuarios").child(firebaseUser!!.uid)
+
         ObtenerDato()
     }
 
@@ -86,7 +89,8 @@ class MainActivity : AppCompatActivity() {
                     usuario?.let {
                         idtvNombreNavHeader.text = it.getNombre()
                         idtvCorreoNavHeader.text = it.getCorreo()
-                        Log.w("TAG", "Nombre: ${it.getNombre()}\nCorreo: ${it.getCorreo()}")
+                        nombreUser = it.getNombre().toString()
+
                     }
                 }
             }
