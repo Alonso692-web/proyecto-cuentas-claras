@@ -42,17 +42,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_gastos_ingresos,
                 R.id.nav_ahorros,
                 R.id.nav_salud_financiera,
-                R.id.nav_soporte
+                //R.id.nav_soporte
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {

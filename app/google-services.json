@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "307142408818",
+    "firebase_url": "https://examen03-43ac6-default-rtdb.firebaseio.com",
+    "project_id": "examen03-43ac6",
+    "storage_bucket": "examen03-43ac6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307142408818:android:6167ba227a07b7e1d0e0eb",
+        "android_client_info": {
+          "package_name": "com.example.gor_examen03"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp0hMK7Lb2oRqg6_tTdFe_TJ0vaFCI2Jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307142408818:android:615d70a78f06aa45d0e0eb",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_cuentas_claras"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBp0hMK7Lb2oRqg6_tTdFe_TJ0vaFCI2Jw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
